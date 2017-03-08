@@ -18,14 +18,15 @@ public class main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        int[] intList = {2,1,3,7,1,8,2,10};
+//        int[] intList = {2,1,3,7,1,8,2,10};
 //        InsertionSort insertionSort = new InsertionSort(intList);
 //        insertionSort.sortInt();
 //
-        BubbleSort bubbleSort = new BubbleSort(intList);
+
+//        BubbleSort bubbleSort = new BubbleSort(intList);
         //Controllers.Sort doesnt start sorting until u stepforward
-        bubbleSort.sortInt();
-        bubbleSort.getList();
+//        bubbleSort.sortInt();
+//        System.out.println(bubbleSort.getList());
 //        bubbleSort.stepForward();
 //        bubbleSort.stepForward();
 //        bubbleSort.stepForward();
