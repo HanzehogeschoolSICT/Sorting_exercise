@@ -9,28 +9,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <TabPane prefHeight="400.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Controller">
-    <tabs>
-        <Tab text="BubbleSort">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0">
-                    <children>
-                        <BarChart fx:id="barChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
-                            <xAxis>
-                                <CategoryAxis side="BOTTOM" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis side="LEFT" />
-                            </yAxis>
-                        </BarChart>
-                        <Button fx:id="button" layoutX="14.0" layoutY="326.0" onAction="#nextStepButton" text="Set array" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </Tab>
-        <Tab text="InsertionSort">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-        </Tab>
-    </tabs>
-</TabPane>
+     <tabs>
+       <Tab text="BubbleSort">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0">
+                  <children>
+                  <BarChart fx:id="barChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  </children>
+               <Button fx:id="button" layoutX="14.0" layoutY="326.0" onAction="#nextStepButton" text="Set array" />
+           </AnchorPane>
+         </content>
+       </Tab>
+     </tabs>
+   </TabPane>

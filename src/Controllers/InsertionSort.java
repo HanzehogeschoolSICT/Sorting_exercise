@@ -31,19 +31,7 @@ public class InsertionSort implements Sort {
         list[index] = list[index-1];
         list[index-1] = currentValue;
     }
-    /*
-     * Go one step forward
-     */
-    @Override
-    public void stepForward() {
-
-    }
-
-    /*
-     * Wait untill the step button is clicked
-     */
-    @Override
-    public void waitForStep() {
+    public void nextStep(){
 
     }
 }
