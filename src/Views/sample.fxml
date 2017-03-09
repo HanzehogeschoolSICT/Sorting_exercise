@@ -23,7 +23,7 @@
                     </yAxis>
                   </BarChart>
                   </children>
-               <Button fx:id="button" layoutX="14.0" layoutY="326.0" onAction="#nextStepButton" text="Set array" />
+               <Button fx:id="button" layoutX="14.0" layoutY="326.0" onAction="#nextStepButton" text="Next step" />
            </AnchorPane>
          </content>
        </Tab>

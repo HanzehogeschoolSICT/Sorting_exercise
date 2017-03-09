@@ -29,6 +29,17 @@ public class Controller implements Initializable {
         //Set animation off so when updating it's not animating everytime
         barChart.setAnimated(false);
 
+        //Fix button position when resizing the width
+        barChart.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth)->{
+            button.setLayoutX(barChart.getLayoutX());
+            button.setLayoutY(barChart.getHeight());
+        });
+        //Fix button position when resizing the height
+        barChart.heightProperty().addListener((ObservableValue, oldSceneWidth, newSceneWidth)->{
+            button.setLayoutX(barChart.getLayoutX());
+            button.setLayoutY(barChart.getHeight());
+        });
+
         //Use the BubbleSort Algorithm
         bubbleSort = new BubbleSort(intList);
 
