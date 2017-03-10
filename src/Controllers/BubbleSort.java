@@ -13,6 +13,7 @@ public class BubbleSort implements Sort {
     private int[] list;
     private boolean keepSearching;
     private boolean allowedToStep;
+    private boolean isSorted = false;
     private int index;
 
     /*
@@ -43,6 +44,7 @@ public class BubbleSort implements Sort {
             index++;
         }else{
             if(keepSearching == false){
+                isSorted = true;
                 System.out.println("List is sorted");
             }else{
                 keepSearching = false;
@@ -66,5 +68,12 @@ public class BubbleSort implements Sort {
      */
     public int[] getList(){
         return list;
+    }
+
+    /*
+    * @return true If list is sorted
+    */
+    public boolean isSorted(){
+        return isSorted;
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Controller">
+    <tabs>
+        <Tab fx:id="bubbleSortTab" text="BubbleSort">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0">
+                    <children>
+                        <BarChart fx:id="bubbleSortBarChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                        </BarChart>
+                    </children>
+                    <Button fx:id="bubbleSortButton" layoutX="14.0" layoutY="326.0" onAction="#bubbleSortNextStepButton" text="Next step" />
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab fx:id="insertionSortTab" text="InsertionSort">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0">
+                    <children>
+                        <BarChart fx:id="insertionSortBarChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                        </BarChart>
+                    </children>
+                    <Button fx:id="insertionSortButton" layoutX="14.0" layoutY="326.0" onAction="#insertionSortNextStepButton" text="Next step" />
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
