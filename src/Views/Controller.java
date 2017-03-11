@@ -3,6 +3,7 @@ package Views;
 import Controllers.Sort;
 import Controllers.BubbleSort;
 import Controllers.InsertionSort;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.Initializable;
@@ -20,16 +21,23 @@ import javafx.stage.*;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
 public class Controller implements Initializable {
-    public Button insertionSortButton;//id name in fxml file
-    public Button bubbleSortButton;
+    public Button insertionSortButtonNextStep;//id name in fxml file
+    public Button bubbleSortButtonStart;
+    public Button bubbleSortButtonStop;
+    public Button insertionSortButtonStop;
+    public Button insertionSortButtonStart;
+    public Button bubbleSortButtonNextStep;
     public BarChart bubbleSortBarChart;
     public BarChart insertionSortBarChart;
     public TabPane tabPane;
     public XYChart.Series series;
     public Sort bubbleSort;
     public Sort insertionSort;
+    public boolean stopSorting = false;
+    public int sortingSpeed = 1000; //This variable is used to set the waiting time in the start sorting method
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,8 +56,13 @@ public class Controller implements Initializable {
         insertionSort = new InsertionSort(intList);
 
         //Fix button positions when resizing the window
-        fixButtonPositionOnResize(bubbleSortButton, bubbleSortBarChart);
-        fixButtonPositionOnResize(insertionSortButton, insertionSortBarChart);
+        fixButtonPositionOnResize(bubbleSortButtonNextStep, bubbleSortBarChart,16);
+        fixButtonPositionOnResize(insertionSortButtonNextStep, insertionSortBarChart,16);
+        fixButtonPositionOnResize(bubbleSortButtonStart, bubbleSortBarChart, 90);
+        fixButtonPositionOnResize(insertionSortButtonStart, insertionSortBarChart, 90);
+        fixButtonPositionOnResize(bubbleSortButtonStop, bubbleSortBarChart, 138);
+        fixButtonPositionOnResize(insertionSortButtonStop, insertionSortBarChart, 138);
+
 
         //Check if the tab is switched
         tabPane.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
@@ -80,16 +93,17 @@ public class Controller implements Initializable {
      * Make button position relative to certain chart
      * @param Button The button that is positioned relative to a chart
      * @param BarChart A BarChart where the button is relative to
+     * @param xOffset The amount of pixels the button is relative to the BarChart position
      */
-    public void fixButtonPositionOnResize(Button button, BarChart barChart){
+    public void fixButtonPositionOnResize(Button button, BarChart barChart, int xOffset){
         //Fix position of button when resizing the width
         barChart.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth)->{
-            button.setLayoutX(barChart.getLayoutX() + 16);
+            button.setLayoutX(barChart.getLayoutX() + xOffset);
             button.setLayoutY(barChart.getHeight());
         });
         //Fix position of button when resizing the height
         barChart.heightProperty().addListener((ObservableValue, oldSceneWidth, newSceneWidth)->{
-            button.setLayoutX(barChart.getLayoutX() + 16);
+            button.setLayoutX(barChart.getLayoutX() + xOffset);
             button.setLayoutY(barChart.getHeight());
         });
     }
@@ -186,5 +200,82 @@ public class Controller implements Initializable {
     public void updateBarChart(Sort sortAlorightm, BarChart barChart){
        listToSeries(sortAlorightm.getList(), sortAlorightm);
        addSerieToBarChart(barChart);
+    }
+
+    /*
+     * Automaticly performs a nextstep in the BubbelSort algorithm untill the list is sorted
+     */
+    public void bubbleSortStartSorting(){
+        Thread thread = new Thread() {
+            public void run() {
+                while(!bubbleSort.isSorted()) {
+                    //When the stop button is clicked break the while loop
+                    if(stopSorting){
+                        break;
+                    }
+                    try{
+                        //Go one step further in the bubbleSort algorithm
+                        bubbleSort.nextStep();
+                        //Update the JavaFX view
+                        Platform.runLater(new Runnable() {
+                            @Override public void run() {
+                                updateBarChart(bubbleSort, bubbleSortBarChart);
+                            }
+                        });
+                        Thread.sleep(sortingSpeed);
+                    }catch (InterruptedException e){
+                        System.out.println(e.getStackTrace());
+                    }
+                }
+            }
+        };
+        thread.start();
+    }
+
+    /*
+     * Automaticly performs a nextstep in the InsertionSort algorithm untill the list is sorted
+     */
+    public void insertionSortStartSorting(){
+        Thread thread = new Thread() {
+            public void run() {
+                while(!bubbleSort.isSorted()) {
+                    //When the stop button is clicked break the while loop
+                    if(stopSorting){
+                        break;
+                    }
+                    try{
+                        //Go one step further in the bubbleSort algorithm
+                        insertionSort.nextStep();
+                        //Update the JavaFX view
+                        Platform.runLater(new Runnable() {
+                            @Override public void run() {
+                                updateBarChart(insertionSort, insertionSortBarChart);
+                            }
+                        });
+                        Thread.sleep(sortingSpeed);
+                    }catch (InterruptedException e){
+                        System.out.println(e.getStackTrace());
+                    }
+                }
+            }
+        };
+        thread.start();
+    }
+
+    /*
+     * Stop the bubbleSortStartSorting() method at the current time/step
+     * Sets the stopSorting boolean that is used as a condition in the bubbleSortStartSorting() method
+     */
+    public void insertionSortStopSorting(){
+        stopSorting = true;
+    }
+
+
+    /*
+     * Stop the bubbleSortStartSorting() method at the current time/step
+     * Sets the stopSorting boolean that is used as a condition in the bubbleSortStartSorting() method
+     */
+    public void bubbleSortStopSorting(){
+        stopSorting = true;
     }
 }
