@@ -14,7 +14,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.Controller">
+<TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller">
      <tabs>
        <Tab fx:id="bubbleSortTab" text="BubbleSort">
          <content>

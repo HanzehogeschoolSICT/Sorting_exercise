@@ -1,8 +1,4 @@
-package Controllers;
-
-import Controllers.Sort;
-
-import java.util.Arrays;
+package Models;
 
 /**
  * Created by jouke on 6-3-2017.

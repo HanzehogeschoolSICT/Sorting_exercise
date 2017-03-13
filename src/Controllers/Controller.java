@@ -1,8 +1,8 @@
-package Views;
+package Controllers;
 
-import Controllers.Sort;
-import Controllers.BubbleSort;
-import Controllers.InsertionSort;
+import Models.Sort;
+import Models.BubbleSort;
+import Models.InsertionSort;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,14 +12,9 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.*;
 
-import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.StringJoiner;
 
 public class Controller implements Initializable {
     public Button insertionSortButtonNextStep;//id name in fxml file
@@ -66,8 +61,8 @@ public class Controller implements Initializable {
         insertionSort = new InsertionSort(intList);
 
         //Fix button positions when resizing the window
-        fixButtonPositionOnResize(controlBoxB, bubbleSortBarChart,16);
-        fixButtonPositionOnResize(controlBoxI, insertionSortBarChart, 16);
+        fixHboxRelativeToScreen(controlBoxB, bubbleSortBarChart,16);
+        fixHboxRelativeToScreen(controlBoxI, insertionSortBarChart, 16);
 
 
         //Check if the tab is switched
@@ -77,7 +72,6 @@ public class Controller implements Initializable {
 
 
         speedSliderB.setMax(1000);
-        speedSliderB.setShowTickLabels(true);
         speedSliderB.valueProperty().addListener((observable, oldValue, newValue) -> {
             speedLabelB.setText(String.valueOf(newValue.intValue()));
         });
@@ -101,7 +95,6 @@ public class Controller implements Initializable {
 
         //Initialize controls for insertionsort
         speedSliderI.setMax(1000);
-        speedSliderI.setShowTickLabels(true);
         speedSliderI.valueProperty().addListener((observable, oldValue, newValue) -> {
             speedLabelI.setText(String.valueOf(newValue.intValue()));
         });
@@ -154,8 +147,6 @@ public class Controller implements Initializable {
 
 
         this.sortingSpeed = Integer.parseInt(speedLabelB.getText()) * indicator;
-
-        System.out.println("Snelheid in ms: " + this.sortingSpeed);
     }
 
 
@@ -177,7 +168,7 @@ public class Controller implements Initializable {
      * @param BarChart A BarChart where the button is relative to
      * @param xOffset The amount of pixels the button is relative to the BarChart position
      */
-    public void fixButtonPositionOnResize(HBox box, BarChart barChart, int xOffset){
+    public void fixHboxRelativeToScreen(HBox box, BarChart barChart, int xOffset){
         //Fix position of button when resizing the width
         barChart.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth)->{
             box.setLayoutX(barChart.getLayoutX() + xOffset);

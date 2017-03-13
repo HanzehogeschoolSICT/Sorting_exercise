@@ -1,6 +1,4 @@
-package Controllers;
-
-import java.util.Arrays;
+package Models;
 
 /**
  * Created by jouke on 7-3-2017.
