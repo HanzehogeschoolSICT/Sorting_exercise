@@ -16,7 +16,7 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class OldController implements Initializable {
     public Button insertionSortButtonNextStep;//id name in fxml file
     public Button bubbleSortButtonStart;
     public Button bubbleSortButtonStop;
