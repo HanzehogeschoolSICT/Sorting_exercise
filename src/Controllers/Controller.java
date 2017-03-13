@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.QuickSort;
 import Models.Sort;
 import Models.BubbleSort;
 import Models.InsertionSort;
@@ -25,10 +26,14 @@ public class Controller implements Initializable {
     public Button bubbleSortButtonNextStep;
     public BarChart bubbleSortBarChart;
     public BarChart insertionSortBarChart;
+    public BarChart quickSortBarChart;
     public TabPane tabPane;
-    public XYChart.Series series;
+    public XYChart.Series bubbleSortSeries;
+    public XYChart.Series insertionSortSeries;
+    public XYChart.Series quickSortSeries;
     public Sort bubbleSort;
     public Sort insertionSort;
+    public Sort quickSort;
     public boolean stopSorting = false;
     public int sortingSpeed = 1000; //This variable is used to set the waiting time in the start sorting method
 
@@ -44,31 +49,38 @@ public class Controller implements Initializable {
     public TextField speedLabelI;
     public ChoiceBox speedUnitI;
 
+    //Controls Quicksort
+    public HBox controlBoxQ;
+    public Slider speedSliderQ;
+    public TextField speedLabelQ;
+    public ChoiceBox speedUnitQ;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Generate array that has to be sorted
         int[] intList = {2,1,3,7,1,8,2,10};
         //Create new series
-        series = new XYChart.Series<String,Integer>();
+        bubbleSortSeries = new XYChart.Series<String,Integer>();
+        insertionSortSeries = new XYChart.Series<String,Integer>();
+        quickSortSeries = new XYChart.Series<String,Integer>();
         //Set animation off so when updating it's not animating everytime
         bubbleSortBarChart.setAnimated(false);
         insertionSortBarChart.setAnimated(false);
+        quickSortBarChart.setAnimated(false);
 
-        //Use the BubbleSort Algorithm
+
+        //Define algorithms
         bubbleSort = new BubbleSort(intList);
-
-        //Use the InsertionSort algorithm
         insertionSort = new InsertionSort(intList);
+        quickSort = new QuickSort(intList);
+
+
 
         //Fix button positions when resizing the window
         fixHboxRelativeToScreen(controlBoxB, bubbleSortBarChart,16);
         fixHboxRelativeToScreen(controlBoxI, insertionSortBarChart, 16);
+        fixHboxRelativeToScreen(controlBoxQ, quickSortBarChart, 16);
 
-
-        //Check if the tab is switched
-        tabPane.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            changedTab();
-        }));
 
 
         speedSliderB.setMax(1000);
@@ -116,9 +128,13 @@ public class Controller implements Initializable {
             this.changeSpeed(speedUnitI);
         });
 
-        //Set the series of the first tab
-        listToSeries(bubbleSort.getList(), bubbleSort);
-        addSerieToBarChart(bubbleSortBarChart);
+        //Initalize series to BarCharts
+        updateSeries(bubbleSortSeries, bubbleSort);
+        addSerieToBarChart(bubbleSortSeries, bubbleSortBarChart);
+        updateSeries(insertionSortSeries, insertionSort);
+        addSerieToBarChart(insertionSortSeries, insertionSortBarChart);
+        updateSeries(quickSortSeries, quickSort);
+        addSerieToBarChart(quickSortSeries, quickSortBarChart);
 
         System.out.println("View is now loaded!");
     }
@@ -149,19 +165,6 @@ public class Controller implements Initializable {
         this.sortingSpeed = Integer.parseInt(speedLabelB.getText()) * indicator;
     }
 
-
-    /*
-     * When a tab is changed
-     */
-    public void changedTab(){
-        String currentTab = tabPane.getSelectionModel().getSelectedItem().getText();
-        if(currentTab.equals("InsertionSort")){
-            updateBarChart(insertionSort, insertionSortBarChart);
-        }else{
-            updateBarChart(bubbleSort, bubbleSortBarChart);
-        }
-    }
-
     /*
      * Make button position relative to certain chart
      * @param Button The button that is positioned relative to a chart
@@ -184,7 +187,8 @@ public class Controller implements Initializable {
     /*
      * Convert an int array list to serie data
      */
-    public void listToSeries(int[] list, Sort sortAlgorithm){
+    public void updateSeries(XYChart.Series series, Sort sortAlgorithm){
+        int[] list = sortAlgorithm.getList();
         series.getData().clear();
         for(int i=0; i<list.length; i++){
             int x = i;
@@ -225,7 +229,7 @@ public class Controller implements Initializable {
     /*
      * Add serie to barchart
      */
-    public void addSerieToBarChart(BarChart b){
+    public void addSerieToBarChart(XYChart.Series series, BarChart b){
         //Delete old series from barchart
         b.getData().clear();
         //Add new series to bar chart
@@ -241,7 +245,7 @@ public class Controller implements Initializable {
             showPopupListIsSorted();
         }else{
             bubbleSort.nextStep();
-            updateBarChart(bubbleSort, bubbleSortBarChart);
+            updateSeries(bubbleSortSeries, bubbleSort);
         }
     }
 
@@ -263,16 +267,8 @@ public class Controller implements Initializable {
             showPopupListIsSorted();
         }else{
             insertionSort.nextStep();
-            updateBarChart(insertionSort, insertionSortBarChart);
+            updateSeries(insertionSortSeries,insertionSort);
         }
-    }
-
-    /*
-     * Update a barchart with new values
-     */
-    public void updateBarChart(Sort sortAlorightm, BarChart barChart){
-       listToSeries(sortAlorightm.getList(), sortAlorightm);
-       addSerieToBarChart(barChart);
     }
 
     /*
@@ -293,7 +289,7 @@ public class Controller implements Initializable {
                         //Update the JavaFX view
                         Platform.runLater(new Runnable() {
                             @Override public void run() {
-                                updateBarChart(bubbleSort, bubbleSortBarChart);
+                                updateSeries(bubbleSortSeries, bubbleSort);
                             }
                         });
                         Thread.sleep(sortingSpeed);
@@ -324,7 +320,7 @@ public class Controller implements Initializable {
                         //Update the JavaFX view
                         Platform.runLater(new Runnable() {
                             @Override public void run() {
-                                updateBarChart(insertionSort, insertionSortBarChart);
+                                updateSeries(insertionSortSeries, insertionSort);
                             }
                         });
                         Thread.sleep(sortingSpeed);
