@@ -10,10 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.*;
@@ -39,6 +37,18 @@ public class Controller implements Initializable {
     public boolean stopSorting = false;
     public int sortingSpeed = 1000; //This variable is used to set the waiting time in the start sorting method
 
+    //Controls Bubblesort
+    public HBox controlBoxB;
+    public Slider speedSliderB;
+    public TextField speedLabelB;
+    public ChoiceBox speedUnitB;
+
+    //Controls Insertionsort
+    public HBox controlBoxI;
+    public Slider speedSliderI;
+    public TextField speedLabelI;
+    public ChoiceBox speedUnitI;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Generate array that has to be sorted
@@ -56,12 +66,8 @@ public class Controller implements Initializable {
         insertionSort = new InsertionSort(intList);
 
         //Fix button positions when resizing the window
-        fixButtonPositionOnResize(bubbleSortButtonNextStep, bubbleSortBarChart,16);
-        fixButtonPositionOnResize(insertionSortButtonNextStep, insertionSortBarChart,16);
-        fixButtonPositionOnResize(bubbleSortButtonStart, bubbleSortBarChart, 90);
-        fixButtonPositionOnResize(insertionSortButtonStart, insertionSortBarChart, 90);
-        fixButtonPositionOnResize(bubbleSortButtonStop, bubbleSortBarChart, 138);
-        fixButtonPositionOnResize(insertionSortButtonStop, insertionSortBarChart, 138);
+        fixButtonPositionOnResize(controlBoxB, bubbleSortBarChart,16);
+        fixButtonPositionOnResize(controlBoxI, insertionSortBarChart, 16);
 
 
         //Check if the tab is switched
@@ -69,11 +75,87 @@ public class Controller implements Initializable {
             changedTab();
         }));
 
+
+        speedSliderB.setMax(1000);
+        speedSliderB.setShowTickLabels(true);
+        speedSliderB.valueProperty().addListener((observable, oldValue, newValue) -> {
+            speedLabelB.setText(String.valueOf(newValue.intValue()));
+        });
+
+        speedLabelB.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            try {
+                speedSliderB.setValue(Double.parseDouble(newValue));
+            }
+            catch(NumberFormatException e) {
+                speedLabelB.setText("0");
+                speedSliderB.setValue(0.0);
+            }
+
+            this.changeSpeed(speedUnitB);
+        });
+
+        speedUnitB.getSelectionModel().selectedIndexProperty().addListener(e -> {
+            this.changeSpeed(speedUnitB);
+        });
+
+        //Initialize controls for insertionsort
+        speedSliderI.setMax(1000);
+        speedSliderI.setShowTickLabels(true);
+        speedSliderI.valueProperty().addListener((observable, oldValue, newValue) -> {
+            speedLabelI.setText(String.valueOf(newValue.intValue()));
+        });
+
+        speedLabelI.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            try {
+                speedSliderI.setValue(Double.parseDouble(newValue));
+            }
+            catch(NumberFormatException e) {
+                speedLabelI.setText("0");
+                speedSliderI.setValue(0.0);
+            }
+
+            this.changeSpeed(speedUnitI);
+        });
+
+        speedUnitI.getSelectionModel().selectedIndexProperty().addListener(e -> {
+            this.changeSpeed(speedUnitI);
+        });
+
         //Set the series of the first tab
         listToSeries(bubbleSort.getList(), bubbleSort);
         addSerieToBarChart(bubbleSortBarChart);
 
         System.out.println("View is now loaded!");
+    }
+
+    private void changeSpeed(ChoiceBox cb)
+    {
+        int indicator = 1;
+
+        switch(cb.getValue().toString()) {
+            case "ms":
+                indicator = 1;
+                break;
+
+            case "s":
+                indicator = 1000;
+                break;
+
+            case "m":
+                indicator = 60000;
+                break;
+
+            case "h":
+                indicator = 3600000;
+                break;
+        }
+
+
+        this.sortingSpeed = Integer.parseInt(speedLabelB.getText()) * indicator;
+
+        System.out.println("Snelheid in ms: " + this.sortingSpeed);
     }
 
 
@@ -95,16 +177,16 @@ public class Controller implements Initializable {
      * @param BarChart A BarChart where the button is relative to
      * @param xOffset The amount of pixels the button is relative to the BarChart position
      */
-    public void fixButtonPositionOnResize(Button button, BarChart barChart, int xOffset){
+    public void fixButtonPositionOnResize(HBox box, BarChart barChart, int xOffset){
         //Fix position of button when resizing the width
         barChart.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth)->{
-            button.setLayoutX(barChart.getLayoutX() + xOffset);
-            button.setLayoutY(barChart.getHeight());
+            box.setLayoutX(barChart.getLayoutX() + xOffset);
+            box.setLayoutY(barChart.getHeight());
         });
         //Fix position of button when resizing the height
         barChart.heightProperty().addListener((ObservableValue, oldSceneWidth, newSceneWidth)->{
-            button.setLayoutX(barChart.getLayoutX() + xOffset);
-            button.setLayoutY(barChart.getHeight());
+            box.setLayoutX(barChart.getLayoutX() + xOffset);
+            box.setLayoutY(barChart.getHeight());
         });
     }
 
