@@ -279,6 +279,7 @@ public class Controller implements Initializable {
      * Automaticly performs a nextstep in the BubbelSort algorithm untill the list is sorted
      */
     public void bubbleSortStartSorting(){
+        stopSorting = false;
         Thread thread = new Thread() {
             public void run() {
                 while(!bubbleSort.isSorted()) {
@@ -309,6 +310,7 @@ public class Controller implements Initializable {
      * Automaticly performs a nextstep in the InsertionSort algorithm untill the list is sorted
      */
     public void insertionSortStartSorting(){
+        stopSorting = false;
         Thread thread = new Thread() {
             public void run() {
                 while(!bubbleSort.isSorted()) {
