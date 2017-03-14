@@ -11,7 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -24,8 +27,13 @@ public class BubbleSortController extends ViewController implements Initializabl
     private XYChart.Series bubbleSortSeries = new XYChart.Series<String,Integer>();
     private BubbleSort bubbleSort;
     @FXML private BarChart bubbleSortBarChart;
-    @FXML private HBox controlBoxB;
+    @FXML public HBox controlBoxB;
 
+
+    //Controls speed slider
+    @FXML public Slider speedSliderB;
+    @FXML public TextField speedLabelB;
+    @FXML public ChoiceBox speedUnitB;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +53,29 @@ public class BubbleSortController extends ViewController implements Initializabl
 
         //Fix button positions when resizing the window
         fixHboxRelativeToScreen(controlBoxB, bubbleSortBarChart,16);
+
+        //Add listeners to speed selection
+        speedSliderB.setMax(1000);
+        speedSliderB.valueProperty().addListener((observable, oldValue, newValue) -> {
+            speedLabelB.setText(String.valueOf(newValue.intValue()));
+        });
+
+        speedLabelB.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                speedSliderB.setValue(Double.parseDouble(newValue));
+            }
+            catch(NumberFormatException e) {
+                speedLabelB.setText("0");
+                speedSliderB.setValue(0.0);
+            }
+
+            super.changeSpeed(speedUnitB, speedLabelB);
+        });
+
+        speedUnitB.getSelectionModel().selectedIndexProperty().addListener(e -> {
+            this.changeSpeed(speedUnitB, speedLabelB);
+        });
+
 
         System.out.println("Loaded BubbleSort view");
     }

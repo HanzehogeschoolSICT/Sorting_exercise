@@ -12,7 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -72,6 +74,33 @@ public class ViewController implements Initializable {
         thread.start();
     }
 
+    /**
+     * Change sorting speed
+     * @param cb ChoiceBox
+     * @param t TextField
+     */
+    public void changeSpeed(ChoiceBox cb, TextField t)
+    {
+        int indicator = 1;
+        switch(cb.getValue().toString()) {
+            case "ms":
+                indicator = 1;
+                break;
+
+            case "s":
+                indicator = 1000;
+                break;
+
+            case "m":
+                indicator = 60000;
+                break;
+
+            case "h":
+                indicator = 3600000;
+                break;
+        }
+        this.sortingSpeed = Integer.parseInt(t.getText()) * indicator;
+    }
     /**
      * Sets the stopSorting boolean that is used as a condition in the startSorting() method
      */

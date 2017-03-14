@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -19,6 +22,11 @@ public class QuickSortController extends ViewController implements Initializable
     private QuickSort quickSort;
     @FXML private BarChart quickSortBarChart;
     @FXML private HBox controlBoxQ;
+
+    //Controls speed slider
+    @FXML public Slider speedSliderQ;
+    @FXML public TextField speedLabelQ;
+    @FXML public ChoiceBox speedUnitQ;
 
 
     @Override
@@ -39,6 +47,28 @@ public class QuickSortController extends ViewController implements Initializable
 
         //Fix button positions when resizing the window
         fixHboxRelativeToScreen(controlBoxQ, quickSortBarChart,16);
+
+        //Add listeners to speed selection
+        speedSliderQ.setMax(1000);
+        speedSliderQ.valueProperty().addListener((observable, oldValue, newValue) -> {
+            speedLabelQ.setText(String.valueOf(newValue.intValue()));
+        });
+
+        speedLabelQ.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                speedSliderQ.setValue(Double.parseDouble(newValue));
+            }
+            catch(NumberFormatException e) {
+                speedLabelQ.setText("0");
+                speedSliderQ.setValue(0.0);
+            }
+
+            super.changeSpeed(speedUnitQ, speedLabelQ);
+        });
+
+        speedUnitQ.getSelectionModel().selectedIndexProperty().addListener(e -> {
+            this.changeSpeed(speedUnitQ, speedLabelQ);
+        });
 
         System.out.println("Loaded QuickSort view");
     }
