@@ -1,5 +1,3 @@
-package Views;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +14,7 @@ public class main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/view.fxml"));
         primaryStage.setTitle("Sorting algorithms");
         primaryStage.setScene(new Scene(root, 500, 500));
         primaryStage.show();

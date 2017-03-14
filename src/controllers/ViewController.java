@@ -1,8 +1,8 @@
-package Controllers;
+package controllers;
 
-import Models.BubbleSort;
-import Models.InsertionSort;
-import Models.Sort;
+import models.BubbleSort;
+import models.InsertionSort;
+import models.Sort;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +30,7 @@ public class ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Loaded the view");
+        System.out.println("Loaded the main view");
     }
 
     /**

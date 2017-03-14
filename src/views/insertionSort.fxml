@@ -15,7 +15,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.*?>
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InsertionSortController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InsertionSortController">
     <children>
         <BarChart fx:id="insertionSortBarChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
             <xAxis>

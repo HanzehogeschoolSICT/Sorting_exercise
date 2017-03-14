@@ -15,9 +15,9 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.*?>
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BubbleSortController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.QuickSortController">
     <children>
-        <BarChart fx:id="bubbleSortBarChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+        <BarChart fx:id="quickSortBarChart" layoutX="6.0" layoutY="7.0" prefHeight="322.0" prefWidth="764.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
             <xAxis>
                 <CategoryAxis side="BOTTOM" />
             </xAxis>
@@ -25,7 +25,7 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </BarChart>
-        <HBox layoutX="14.0" layoutY="316.0" prefHeight="31.0" prefWidth="744.0" fx:id="controlBoxB">
+        <HBox layoutX="14.0" layoutY="316.0" prefHeight="31.0" prefWidth="744.0" fx:id="controlBoxQ">
             <children>
                 <Button text="Next step" onAction="#nextStep"/>
                 <Button text="Start" onAction="#startSorting">
@@ -36,16 +36,16 @@
                     <HBox.margin>
                         <Insets left="8.0" />
                     </HBox.margin></Button>
-                <TextField prefHeight="31.0" prefWidth="113.0" fx:id="speedLabelB" text="1">
+                <TextField prefHeight="31.0" prefWidth="113.0" fx:id="speedLabelQ" text="1">
                     <HBox.margin>
                         <Insets left="8.0" />
                     </HBox.margin>
                 </TextField>
-                <Slider prefHeight="18.0" HBox.hgrow="ALWAYS" fx:id="speedSliderB">
+                <Slider prefHeight="18.0" HBox.hgrow="ALWAYS" fx:id="speedSliderQ">
                     <HBox.margin>
                         <Insets left="8.0" top="6.0" />
                     </HBox.margin></Slider>
-                <ChoiceBox fx:id="speedUnitB" layoutX="739.0" layoutY="399.0" prefHeight="31.0" prefWidth="115.0" value="s">
+                <ChoiceBox fx:id="speedUnitQ" layoutX="739.0" layoutY="399.0" prefHeight="31.0" prefWidth="115.0" value="s">
                     <String fx:value="ms" />
                     <String fx:value="s" />
                     <String fx:value="m" />

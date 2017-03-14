@@ -1,7 +1,6 @@
-package Controllers;
+package controllers;
 
-import Models.InsertionSort;
-import Models.QuickSort;
+import models.QuickSort;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;

@@ -1,8 +1,8 @@
-package Controllers;
+package controllers;
 
-import Models.Sort;
-import Models.BubbleSort;
-import Models.InsertionSort;
+import models.Sort;
+import models.BubbleSort;
+import models.InsertionSort;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

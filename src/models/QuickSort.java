@@ -1,8 +1,4 @@
-package Models;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+package models;
 
 /**
  * Created by jouke on 13-3-2017.
