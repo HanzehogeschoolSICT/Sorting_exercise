@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
  * Created by jouke on 13-3-2017.
  */
 public class ViewController implements Initializable {
-    private XYChart.Series series = new XYChart.Series<String,Integer>();
     private boolean stopSorting = false;
     private int sortingSpeed = 1000; //default delay is 1000ms
     @FXML public TabPane tabPane;
@@ -36,16 +35,16 @@ public class ViewController implements Initializable {
      * Go one step further in a sorting algorithm and update the series
      * @param sortAlgorithm
      */
-    public void nextStep(Sort sortAlgorithm){
+    public void nextStep(XYChart.Series series, Sort sortAlgorithm){
         if(sortAlgorithm.isSorted()){
             showPopupListIsSorted();
         }else{
             sortAlgorithm.nextStep();
-            updateSeries(sortAlgorithm);
+            updateSeries(series, sortAlgorithm);
         }
     }
 
-    public void startSorting(Sort sortAlgorithm){
+    public void startSorting(XYChart.Series series, Sort sortAlgorithm){
         stopSorting = false;
         Thread thread = new Thread() {
             public void run() {
@@ -60,7 +59,7 @@ public class ViewController implements Initializable {
                         //Update the JavaFX view
                         Platform.runLater(new Runnable() {
                             @Override public void run() {
-                                updateSeries(sortAlgorithm);
+                                updateSeries(series, sortAlgorithm);
                             }
                         });
                         Thread.sleep(sortingSpeed);
@@ -113,7 +112,7 @@ public class ViewController implements Initializable {
     * @NOTE: ONLY do this one time
     * BarChart updates automaticly when serie is updated
     */
-    public void addSerieToBarChart(BarChart b){
+    public void addSerieToBarChart(XYChart.Series series, BarChart b){
         //Delete old series from barchart
         b.getData().clear();
         //Add new series to bar chart
@@ -124,7 +123,7 @@ public class ViewController implements Initializable {
     /*
      * Convert an int array list to serie data
      */
-    public void updateSeries(Sort sortAlgorithm){
+    public void updateSeries(XYChart.Series series, Sort sortAlgorithm){
         int[] list = sortAlgorithm.getList();
         series.getData().clear();
         for(int i=0; i<list.length; i++){

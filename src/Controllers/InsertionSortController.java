@@ -20,11 +20,11 @@ import java.util.ResourceBundle;
 /**
  * Created by jouke on 13-3-2017.
  */
-public class BubbleSortController extends ViewController implements Initializable {
-    private XYChart.Series bubbleSortSeries = new XYChart.Series<String,Integer>();
-    private BubbleSort bubbleSort;
-    @FXML private BarChart bubbleSortBarChart;
-    @FXML private HBox controlBoxB;
+public class InsertionSortController extends ViewController implements Initializable {
+    private XYChart.Series insertionSortSeries = new XYChart.Series<String,Integer>();
+    private InsertionSort insertionSort;
+    @FXML private BarChart insertionSortBarChart;
+    @FXML private HBox controlBoxI;
 
 
     @Override
@@ -32,21 +32,21 @@ public class BubbleSortController extends ViewController implements Initializabl
         //Generate array that has to be sorted
         int[] intList = {2,1,3,7,1,8,2,10};
 
-        //Use BubbleSort algorithm
-        bubbleSort = new BubbleSort(intList);
+        //Use InsertionSort algorithm
+        insertionSort = new InsertionSort(intList);
 
         //Turn animation off
-        bubbleSortBarChart.setAnimated(false);
+        insertionSortBarChart.setAnimated(false);
 
-        //Update the current series with the list from bubbleSort algorithm
+        //Update the current series with the list from insertionSort algorithm
         //Add series one time to this barchart
-        updateSeries(bubbleSortSeries, bubbleSort);
-        addSerieToBarChart(bubbleSortSeries, bubbleSortBarChart);
+        updateSeries(insertionSortSeries, insertionSort);
+        addSerieToBarChart(insertionSortSeries, insertionSortBarChart);
 
         //Fix button positions when resizing the window
-        fixHboxRelativeToScreen(controlBoxB, bubbleSortBarChart,16);
+        fixHboxRelativeToScreen(controlBoxI, insertionSortBarChart,16);
 
-        System.out.println("Loaded BubbleSort view");
+        System.out.println("Loaded InsertionSort view");
     }
 
     /*
@@ -54,11 +54,11 @@ public class BubbleSortController extends ViewController implements Initializabl
      * Updates a BarChart after the step is done
      */
     public void nextStep(){
-        super.nextStep(bubbleSortSeries, bubbleSort);
+        super.nextStep(insertionSortSeries, insertionSort);
     }
 
     public void startSorting(){
-        super.startSorting(bubbleSortSeries, bubbleSort);
+        super.startSorting(insertionSortSeries, insertionSort);
     }
 
     public void stopSorting(){
