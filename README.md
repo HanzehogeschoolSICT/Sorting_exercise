@@ -8,3 +8,6 @@ Because of this ability we can present the sorting algorithms in steps and get t
 # Installation: 
   - Pull the repository
   - Run main
+
+# Presentation:
+![Image](display.PNG)
