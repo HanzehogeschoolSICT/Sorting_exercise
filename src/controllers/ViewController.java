@@ -112,10 +112,11 @@ public class ViewController implements Initializable {
      * @param cb ChoiceBox
      * @param t TextField
      */
-    public void changeSpeed(ChoiceBox cb, TextField t)
+    public void changeSpeed(String unit, TextField t)
     {
         int indicator = 1;
-        switch(cb.getValue().toString()) {
+
+        switch(unit) {
             case "ms":
                 indicator = 1;
                 break;
@@ -133,6 +134,8 @@ public class ViewController implements Initializable {
                 break;
         }
         this.sortingSpeed = Integer.parseInt(t.getText()) * indicator;
+
+        System.out.println(sortingSpeed);
     }
     /**
      * Sets the stopSorting boolean that is used as a condition in the startSorting() method

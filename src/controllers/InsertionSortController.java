@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import models.InsertionSort;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,11 +66,13 @@ public class InsertionSortController extends ViewController implements Initializ
                 speedSliderI.setValue(0.0);
             }
 
-            super.changeSpeed(speedUnitI, speedLabelI);
+            super.changeSpeed(speedUnitI.getValue().toString(), speedLabelI);
         });
 
-        speedUnitI.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            super.changeSpeed(speedUnitI, speedLabelI);
+        speedUnitI.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                changeSpeed(newValue, speedLabelI);
+            }
         });
 
         System.out.println("Loaded InsertionSort view");

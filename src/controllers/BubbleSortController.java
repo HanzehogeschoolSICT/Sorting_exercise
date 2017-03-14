@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import models.BubbleSort;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,11 +66,13 @@ public class BubbleSortController extends ViewController implements Initializabl
                 speedSliderB.setValue(0.0);
             }
 
-            super.changeSpeed(speedUnitB, speedLabelB);
+            super.changeSpeed(speedUnitB.getValue().toString(), speedLabelB);
         });
 
-        speedUnitB.getSelectionModel().selectedIndexProperty().addListener(e -> {
-            super.changeSpeed(speedUnitB, speedLabelB);
+        speedUnitB.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                changeSpeed(newValue, speedLabelB);
+            }
         });
 
 

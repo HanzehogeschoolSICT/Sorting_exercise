@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import models.QuickSort;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,11 +65,13 @@ public class QuickSortController extends ViewController implements Initializable
                 speedSliderQ.setValue(0.0);
             }
 
-            super.changeSpeed(speedUnitQ, speedLabelQ);
+            super.changeSpeed(speedUnitQ.getValue().toString(), speedLabelQ);
         });
 
-        speedUnitQ.getSelectionModel().selectedIndexProperty().addListener(e -> {
-            super.changeSpeed(speedUnitQ, speedLabelQ);
+        speedUnitQ.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                changeSpeed(newValue, speedLabelQ);
+            }
         });
 
         System.out.println("Loaded QuickSort view");
