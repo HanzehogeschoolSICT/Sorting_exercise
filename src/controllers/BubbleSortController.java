@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -31,7 +32,8 @@ public class BubbleSortController extends ViewController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Generate array that has to be sorted
-        int[] intList = {2,1,3,7,1,8,2,10};
+        int[] intList = generateIntList(10);
+        shuffleIntList(intList);
 
         //Use BubbleSort algorithm
         bubbleSort = new BubbleSort(intList);
@@ -66,7 +68,7 @@ public class BubbleSortController extends ViewController implements Initializabl
         });
 
         speedUnitB.getSelectionModel().selectedIndexProperty().addListener(e -> {
-            this.changeSpeed(speedUnitB, speedLabelB);
+            super.changeSpeed(speedUnitB, speedLabelB);
         });
 
 

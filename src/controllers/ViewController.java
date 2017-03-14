@@ -18,7 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by jouke on 13-3-2017.
@@ -31,6 +35,35 @@ public class ViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Loaded the main view");
+    }
+
+    /**
+     * Shuffle a array list of integers
+     * @param list
+     */
+    public void shuffleIntList(int[] list){
+        int index;
+        Random random = ThreadLocalRandom.current();
+        for(int i = list.length -1; i>1; i--){
+            //get random index
+            index = random.nextInt(i + 1);
+
+            //swap random index with current index
+            int temp = list[index];
+            list[index] = list[i];
+            list[i] = temp;
+        }
+    }
+
+    /**
+     * Generate a list from 1 to N(size)
+     */
+    public int[] generateIntList(int size){
+        int[] list = new int[size];
+        for(int i=0; i<size; i++){
+            list[i] = i+1;
+        }
+        return list;
     }
 
     /**

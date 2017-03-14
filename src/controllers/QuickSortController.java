@@ -31,7 +31,8 @@ public class QuickSortController extends ViewController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Generate array that has to be sorted
-        int[] intList = {2,1,3,7,1,8,2,10};
+        int[] intList = generateIntList(10);
+        shuffleIntList(intList);
 
         //Use QuickSort algorithm
         quickSort = new QuickSort(intList);
@@ -66,7 +67,7 @@ public class QuickSortController extends ViewController implements Initializable
         });
 
         speedUnitQ.getSelectionModel().selectedIndexProperty().addListener(e -> {
-            this.changeSpeed(speedUnitQ, speedLabelQ);
+            super.changeSpeed(speedUnitQ, speedLabelQ);
         });
 
         System.out.println("Loaded QuickSort view");
