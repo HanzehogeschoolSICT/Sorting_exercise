@@ -1,4 +1,4 @@
-# Sorting Exercise
+# Sorting Exercise  [![BCH compliance](https://bettercodehub.com/edge/badge/HanzehogeschoolSICT/eran_jouke_sorting)](https://bettercodehub.com/)
 # This is a project for the Hanze University.
 For this exercise we studied several sorting algorithms and determined the Big O(order) of these algorithms.  
 To make a better representation of the sorting algorithms we implemented an interface with three tabs: BubbleSort, QuickSort and InsertionSort.
