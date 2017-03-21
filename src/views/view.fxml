@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewController">
+    <tabs>
+        <Tab fx:id="bubbleSortTab" text="BubbleSort">
+            <content>
+                <fx:include fx:id="bubbleSortPage" source="bubbleSort.fxml"/>
+            </content>
+        </Tab>
+        <Tab fx:id="insertionSortTab" text="InsertionSort">
+            <content>
+                <fx:include fx:id="insertionSortPage" source="insertionSort.fxml"/>
+            </content>
+        </Tab>
+        <Tab fx:id="quickSortTab" text="QuickSort">
+            <content>
+                <fx:include fx:id="quickSortPage" source="quickSort.fxml"/>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
